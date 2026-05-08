@@ -941,8 +941,14 @@ function AboutModal({ open, onClose, t }) {
               ))}
             </div>
           ))}
-          <div style={{ marginTop:"1.5rem", borderTop:`1px solid ${C.rule}`, paddingTop:"1rem", fontSize:"0.82rem", color:C.muted, fontStyle:"italic" }}>
-            Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.
+          <div style={{ marginTop:"1.5rem", borderTop:`1px solid ${C.rule}`, paddingTop:"1rem", fontSize:"0.82rem", color:C.muted }}>
+            <p style={{ fontStyle:"italic", margin:"0 0 0.5rem" }}>
+              Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.
+            </p>
+            <a href="https://arxiv.org/pdf/2306.10052" target="_blank" rel="noopener noreferrer"
+              style={{ color:C.accent, fontSize:"0.82rem", textDecoration:"underline" }}>
+              {t.lang === "it" ? "→ Leggi l'articolo originale (PDF)" : "→ Read the original paper (PDF)"}
+            </a>
           </div>
         </div>
         <div style={{ padding:"1rem 1.4rem", borderTop:`1px solid ${C.rule}`, display:"flex", justifyContent:"flex-end", flexShrink:0, background:C.cream }}>
@@ -1205,6 +1211,8 @@ export default function App() {
       <div style={{ minHeight:"100vh", background:C.paper, fontFamily:"'Georgia','Times New Roman',serif", color:C.ink, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"2rem" }}>
         <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}`}</style>
         <div style={{ textAlign:"center", maxWidth:520, animation:"fadeUp 0.4s ease" }}>
+          <div style={{ fontSize:"0.65rem", letterSpacing:"0.22em", textTransform:"uppercase", color:C.gold, marginBottom:"0.4rem" }}>Mollick &amp; Mollick (2023)</div>
+          <div style={{ fontSize:"1.35rem", fontWeight:"normal", color:C.ink, marginBottom:"2rem", fontFamily:"'Georgia',serif" }}>Progettare con l'AI: percorso per docenti</div>
           <div style={{ fontSize:"3rem", marginBottom:"1.25rem" }}>🎓</div>
           <h1 style={{ margin:"0 0 0.75rem", fontSize:"1.6rem", fontWeight:"normal" }}>{ls.title}</h1>
           <p style={{ margin:"0 0 2rem", fontSize:"0.97rem", color:C.muted, lineHeight:1.8 }}>{ls.sub}</p>
@@ -1220,7 +1228,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ position:"absolute", bottom:"1.5rem", fontSize:"0.78rem", color:C.muted, textAlign:"center" }}>
-          Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School.
+          Creato da Luigi Parisi sulla base di: Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.
         </div>
       </div>
     );
