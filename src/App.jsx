@@ -118,6 +118,40 @@ const I18N = {
       compatible:"Funziona con Claude Projects, ChatGPT GPTs e Gemini Gems.",
       restartBtn:"Ricomincia da capo",
     },
+    about:{
+      bannerTitle:"Cos'è questa app e come funziona",
+      bannerBtn:"Apri →",
+      headerBtn:"📖 Guida",
+      close:"Chiudi",
+      modalTitle:"Costruire il prompt giusto. Un percorso per docenti.",
+      sections:[
+        { paras:[
+          "Integrare l'intelligenza artificiale nella didattica richiede una domanda preliminare che spesso rimane implicita: cosa voglio che l'AI faccia, esattamente, per i miei studenti? Prima ancora di scegliere uno strumento, vale la pena fermarsi sull'intenzione pedagogica — perché è quella che determina se l'AI diventa un supporto all'apprendimento o una scorciatoia che lo aggira.",
+          "Questa distinzione è al centro del lavoro di Ethan e Lilach Mollick (2023), ricercatori della Wharton School dell'Università della Pennsylvania. Nel loro studio Assigning AI: Seven Approaches for Students with Prompts, i Mollick analizzano come i Large Language Model possano diventare strumenti pedagogicamente efficaci — a patto che il docente ne definisca con precisione il ruolo prima di consegnarli agli studenti. La tesi centrale è semplice quanto profonda: l'AI non ha una funzione didattica naturale. Ce la dà il docente, attraverso il prompt.",
+        ]},
+        { heading:"Sette ruoli, sette intenzioni pedagogiche", paras:[
+          "I Mollick identificano sette modi in cui un'AI può essere assegnata agli studenti, ciascuno fondato su una base teorica precisa e associato a benefici e rischi specifici.",
+          "Il Tutor affianca lo studente nella costruzione di nuova conoscenza, facendo domande invece di dare risposte. Si fonda sull'evidenza che il tutoraggio personalizzato è una delle strategie di apprendimento più efficaci in assoluto — ma richiede un prompt attento, perché il rischio di confabulazione (risposte plausibili ma errate) è qui più alto che altrove.",
+          "Il Mentor entra in gioco quando lo studente ha già prodotto qualcosa e ha bisogno di feedback per migliorarlo. Un buon feedback non è un giudizio finale: è un processo continuo, fatto di tre componenti — chiarire gli obiettivi, indicare lo stato attuale, suggerire i passi successivi. L'AI può sostenere questo processo in modo scalabile, raggiungendo ogni studente in ogni momento del lavoro.",
+          "Il Coach accompagna la riflessione metacognitiva: aiuta lo studente a estrarre significato da un'esperienza appena vissuta — un esame, un progetto, un lavoro di gruppo — o a prepararsi a una futura attraverso un pre-mortem. La metacognizione, ovvero la capacità di riflettere sul proprio processo di apprendimento, è uno dei predittori più forti del successo scolastico.",
+          "Il Compagno di squadra svolge le funzioni che gli esseri umani faticano ad assumere nel gruppo: il devil's advocate, l'analizzatore imparziale delle competenze, il facilitatore delle decisioni difficili. Serve a contrastare il groupthink e a migliorare la qualità del lavoro collettivo.",
+          "Lo Studente inverte il rapporto: è l'AI ad assumere il ruolo dell'allievo, e il docente — o gli studenti stessi — a insegnarle. Insegnare qualcosa a qualcuno, anche a una macchina, è una delle tecniche di apprendimento più potenti che conosciamo, perché obbliga a riorganizzare la conoscenza, a semplificarla, a difenderla.",
+          "Il Simulatore crea un ambiente sicuro per la pratica deliberata: lo studente applica competenze già acquisite in scenari realistici, sbaglia senza conseguenze reali, riceve feedback immediato. È il ruolo più adatto quando l'obiettivo è il trasferimento delle competenze in contesti nuovi.",
+          "Lo Strumento è il ruolo più pragmatico: l'AI esegue il lavoro meccanico — una prima bozza, una lista di esempi, una raccolta di dati — liberando energia cognitiva per la riflessione critica. Funziona solo se lo studente mantiene il controllo del processo e non delega anche il ragionamento.",
+        ]},
+        { heading:"Il problema del prompt", paras:[
+          "Sapere che esistono sette ruoli non è sufficiente. Il passaggio decisivo è trasformare questa conoscenza in un'istruzione precisa per l'AI — un prompt — che sia pedagogicamente fondato, adatto al contesto specifico della propria classe, e che anticipi i rischi invece di ignorarli.",
+          "I Mollick indicano cinque componenti essenziali di un prompt efficace: definire chi è l'AI e qual è il suo obiettivo (Role and Goal); scrivere la sequenza precisa di azioni che deve seguire (Step-by-step instructions); tradurre i principi pedagogici in istruzioni esplicite (Pedagogy); specificare cosa l'AI non deve fare in nessun caso (Constraints); aggiungere i dati contestuali specifici — il livello degli studenti, l'argomento, gli errori tipici (Personalization).",
+          "Costruire un prompt in questo modo richiede riflessione. Non è un lavoro tecnico: è un lavoro didattico. Chiede al docente di esplicitare la propria intenzione pedagogica con una precisione che spesso la lezione quotidiana non richiede.",
+        ]},
+        { heading:"A cosa serve questo strumento", paras:[
+          "Questo percorso guida il docente attraverso questo processo in modo partecipato. Non genera prompt automaticamente su richiesta: è uno spazio di co-costruzione, in cui il docente rimane protagonista di ogni scelta.",
+          "Il percorso inizia con tre domande sull'obiettivo di apprendimento e sul contesto: il ruolo più adatto emerge da queste risposte, con una spiegazione del ragionamento che lo sottende. Poi, componente per componente, il docente compone il proprio prompt seguendo il framework di Mollick. Per ogni componente lo strumento offre una bozza di partenza — generata a partire dal contesto già descritto — ma il testo è completamente modificabile: il docente può riscriverlo, ampliarlo, o sostituirlo prima di copiarlo. Nulla viene fissato senza il suo intervento.",
+          "Il risultato finale non è solo un testo da incollare in una chat. È un'istruzione per addestrare un chatbot personalizzato — da caricare in un Claude Project, un GPT personalizzato, un Gem di Gemini, o NotebookLM insieme ai materiali del corso — che risponda in modo coerente con l'obiettivo didattico ogni volta che uno studente lo interroga.",
+          "L'AI non diventa una cattedra parallela. Diventa uno strumento nelle mani del docente, che ha scelto cosa farle fare, come farlo, e con quali limiti.",
+        ]},
+      ],
+    },
     roles:{
       tutor:{
         id:"tutor", icon:"📚", label:"Tutor", subtitle:"Istruzione diretta personalizzata",
@@ -447,6 +481,40 @@ Nota per il docente: richiedere allo studente di documentare il proprio contribu
       warnSuffix:" Test the prompt yourself at least twice before assigning it.",
       compatible:"Works with Claude Projects, ChatGPT GPTs and Gemini Gems.",
       restartBtn:"Start over",
+    },
+    about:{
+      bannerTitle:"What this app is and how it works",
+      bannerBtn:"Open →",
+      headerBtn:"📖 Guide",
+      close:"Close",
+      modalTitle:"Building the right prompt. A guided path for educators.",
+      sections:[
+        { paras:[
+          "Integrating artificial intelligence into teaching raises a question that often remains unspoken: what exactly do I want the AI to do for my students? Before choosing a tool, it is worth pausing on pedagogical intention — because that is what determines whether AI becomes a genuine support for learning or a shortcut that bypasses it.",
+          "This distinction lies at the heart of the work by Ethan and Lilach Mollick (2023), researchers at the Wharton School of the University of Pennsylvania. In their paper Assigning AI: Seven Approaches for Students with Prompts, the Mollicks examine how Large Language Models can become pedagogically effective — provided the educator defines the AI's role with precision before putting it in students' hands. Their central argument is as simple as it is fundamental: AI has no natural pedagogical function. That function is given to it by the educator, through the prompt.",
+        ]},
+        { heading:"Seven roles, seven pedagogical intentions", paras:[
+          "The Mollicks identify seven ways in which AI can be assigned to students, each grounded in a specific theoretical foundation and associated with distinct benefits and risks.",
+          "The Tutor supports the student in building new knowledge by asking questions rather than providing answers. It draws on evidence that personalised tutoring is one of the most effective learning strategies known — but it requires a carefully crafted prompt, because the risk of confabulation (plausible but incorrect responses) is highest here.",
+          "The Mentor comes into play when the student has already produced something and needs feedback to improve it. Effective feedback is not a final judgement: it is a continuous process with three components — clarifying objectives, indicating the current state, and suggesting next steps. AI can support this process at scale, reaching every student at every stage of their work.",
+          "The Coach supports metacognitive reflection: it helps students extract meaning from a recent experience — an exam, a project, a group assignment — or prepare for a future one through a pre-mortem exercise. Metacognition, the ability to reflect on one's own learning process, is one of the strongest predictors of academic success.",
+          "The Teammate performs the functions that humans find difficult to assume in a group: the devil's advocate, the impartial skills analyser, the facilitator of difficult decisions. It counteracts groupthink and improves the quality of collective work.",
+          "The Student inverts the relationship: the AI takes on the role of the learner, and the educator — or the students themselves — teaches it. Teaching something to someone, even a machine, is one of the most powerful learning techniques available, because it forces the reorganisation of knowledge, its simplification, and its defence.",
+          "The Simulator creates a safe environment for deliberate practice: students apply already-acquired skills in realistic scenarios, make mistakes without real consequences, and receive immediate feedback. It is the most appropriate role when the goal is the transfer of competencies to new contexts.",
+          "The Tool is the most pragmatic role: the AI performs mechanical work — a first draft, a set of examples, a data collection — freeing up cognitive energy for critical reflection. It only works if the student maintains control of the process and does not delegate the thinking itself.",
+        ]},
+        { heading:"The challenge of the prompt", paras:[
+          "Knowing that seven roles exist is not enough. The decisive step is translating this knowledge into a precise instruction for the AI — a prompt — that is pedagogically grounded, suited to the specific classroom context, and anticipates risks rather than ignoring them.",
+          "The Mollicks identify five essential components of an effective prompt: defining who the AI is and what its goal is (Role and Goal); writing the precise sequence of actions it must follow (Step-by-step instructions); translating pedagogical principles into explicit instructions (Pedagogy); specifying what the AI must never do under any circumstances (Constraints); and adding specific contextual data — student level, topic, typical errors (Personalization).",
+          "Building a prompt in this way requires reflection. It is not a technical exercise: it is a pedagogical one. It asks educators to articulate their instructional intention with a precision that the day-to-day lesson often does not demand.",
+        ]},
+        { heading:"What this tool does", paras:[
+          "This guided path takes educators through this process in a genuinely participatory way. It does not generate prompts automatically on request: it is a space for co-construction, in which the educator remains the author of every decision.",
+          "The path begins with three questions about the learning objective and context: the most suitable role emerges from these answers, together with an explanation of the reasoning behind it. Then, component by component, the educator composes their prompt following the Mollick framework. For each component the tool offers a starting draft — generated from the context already described — but the text is fully editable: the educator can rewrite it, expand it, or replace it entirely before copying. Nothing is set without their active input.",
+          "The final result is not just text to paste into a chat window. It is an instruction set for training a personalised chatbot — to be loaded into a Claude Project, a custom GPT, a Gemini Gem, or NotebookLM together with course materials — that will respond consistently with the learning objective every time a student interacts with it.",
+          "The AI does not become a parallel teacher. It becomes a tool in the educator's hands — one whose function, method, and limits have been deliberately chosen.",
+        ]},
+      ],
     },
     roles:{
       tutor:{
@@ -841,6 +909,50 @@ function ComposeStep({ component, value, onChange, index, total, t }) {
   );
 }
 
+// ─── AboutModal ───────────────────────────────────────────────
+function AboutModal({ open, onClose, t }) {
+  const ab = t.about;
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open, onClose]);
+  if (!open) return null;
+  return (
+    <>
+      <div onClick={onClose} style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.45)", zIndex:60 }} />
+      <div style={{ position:"fixed", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:"min(720px,95vw)", maxHeight:"85vh", background:C.paper, zIndex:70, borderRadius:6, boxShadow:"0 8px 40px rgba(0,0,0,0.22)", border:`1px solid ${C.rule}`, display:"flex", flexDirection:"column", overflow:"hidden" }}>
+        <div style={{ background:C.ink, padding:"1.1rem 1.4rem", display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0, borderBottom:`3px solid ${C.gold}` }}>
+          <div>
+            <div style={{ fontSize:"0.65rem", color:C.gold, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"0.2rem" }}>Mollick & Mollick (2023)</div>
+            <div style={{ color:C.paper, fontSize:"1.05rem" }}>{ab.modalTitle}</div>
+          </div>
+          <button onClick={onClose} style={{ background:"none", border:"none", color:C.muted, fontSize:"1.5rem", cursor:"pointer", lineHeight:1, marginLeft:"1rem" }}>✕</button>
+        </div>
+        <div style={{ overflowY:"auto", padding:"1.75rem 1.75rem 2rem", lineHeight:1.8 }}>
+          {ab.sections.map((sec, si) => (
+            <div key={si} style={{ marginBottom:"1.5rem" }}>
+              {sec.heading && (
+                <h3 style={{ margin:"0 0 0.75rem", fontSize:"1rem", fontWeight:"bold", color:C.accent, borderBottom:`1px solid ${C.rule}`, paddingBottom:"0.35rem" }}>{sec.heading}</h3>
+              )}
+              {sec.paras.map((p, pi) => (
+                <p key={pi} style={{ margin:"0 0 0.9rem", fontSize:"0.95rem", color:C.ink }}>{p}</p>
+              ))}
+            </div>
+          ))}
+          <div style={{ marginTop:"1.5rem", borderTop:`1px solid ${C.rule}`, paddingTop:"1rem", fontSize:"0.82rem", color:C.muted, fontStyle:"italic" }}>
+            Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.
+          </div>
+        </div>
+        <div style={{ padding:"1rem 1.4rem", borderTop:`1px solid ${C.rule}`, display:"flex", justifyContent:"flex-end", flexShrink:0, background:C.cream }}>
+          <button onClick={onClose} style={{ background:C.ink, color:C.paper, border:`1.5px solid ${C.gold}`, borderRadius:4, padding:"0.55rem 1.4rem", fontSize:"0.9rem", cursor:"pointer", fontFamily:"'Georgia',serif" }}>{ab.close}</button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 // ─── RoleDrawer ───────────────────────────────────────────────
 function RoleDrawer({ open, onClose, t }) {
   return (
@@ -1008,6 +1120,7 @@ export default function App() {
   const [composeIndex,  setComposeIndex]  = useState(0);
   const [composeValues, setComposeValues] = useState({});
   const [drawerOpen,    setDrawerOpen]    = useState(false);
+  const [aboutOpen,     setAboutOpen]     = useState(false);
   const textareaRef = useRef(null);
 
   const t   = lang ? I18N[lang] : I18N.it;
@@ -1129,6 +1242,10 @@ export default function App() {
             style={{ background:"none", border:`1.5px solid rgba(255,255,255,0.25)`, borderRadius:4, color:"rgba(255,255,255,0.65)", padding:"0.4rem 0.8rem", fontSize:"0.78rem", cursor:"pointer", fontFamily:"'Georgia',serif", whiteSpace:"nowrap" }}>
             {t.otherLangLabel}
           </button>
+          <button onClick={()=>setAboutOpen(true)}
+            style={{ background:"none", border:`1.5px solid rgba(255,255,255,0.35)`, borderRadius:4, color:"rgba(255,255,255,0.85)", padding:"0.5rem 1rem", fontSize:"0.88rem", cursor:"pointer", fontFamily:"'Georgia',serif", whiteSpace:"nowrap" }}>
+            {t.about.headerBtn}
+          </button>
           <button onClick={()=>setDrawerOpen(true)}
             style={{ background:"none", border:`1.5px solid ${C.gold}`, borderRadius:4, color:C.gold, padding:"0.5rem 1rem", fontSize:"0.88rem", cursor:"pointer", fontFamily:"'Georgia',serif", whiteSpace:"nowrap" }}>
             {t.drawerBtn}
@@ -1136,6 +1253,7 @@ export default function App() {
         </div>
       </div>
 
+      <AboutModal open={aboutOpen} onClose={()=>setAboutOpen(false)} t={t} />
       <RoleDrawer open={drawerOpen} onClose={()=>setDrawerOpen(false)} t={t} />
 
       <div style={{ maxWidth:780, margin:"0 auto", padding:"2.25rem 2rem 5rem" }}>
@@ -1168,6 +1286,13 @@ export default function App() {
                   </div>
                 </div>
               ))}
+            </div>
+            <div style={{ background:C.cream, border:`1px solid ${C.gold}`, borderRadius:5, padding:"0.85rem 1.25rem", marginBottom:"1.5rem", display:"flex", justifyContent:"space-between", alignItems:"center", gap:"1rem" }}>
+              <span style={{ fontSize:"0.95rem", color:C.ink }}>📖 {t.about.bannerTitle}</span>
+              <button onClick={()=>setAboutOpen(true)}
+                style={{ background:C.ink, color:C.paper, border:`1.5px solid ${C.gold}`, borderRadius:4, padding:"0.4rem 1rem", fontSize:"0.88rem", cursor:"pointer", fontFamily:"'Georgia',serif", whiteSpace:"nowrap", flexShrink:0 }}>
+                {t.about.bannerBtn}
+              </button>
             </div>
             <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"1rem" }}>
               <button onClick={()=>setPhase("questions")}
