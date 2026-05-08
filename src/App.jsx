@@ -1211,10 +1211,9 @@ export default function App() {
       <div style={{ minHeight:"100vh", background:C.paper, fontFamily:"'Georgia','Times New Roman',serif", color:C.ink, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"2rem" }}>
         <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}`}</style>
         <div style={{ textAlign:"center", maxWidth:520, animation:"fadeUp 0.4s ease" }}>
-          <div style={{ fontSize:"0.65rem", letterSpacing:"0.22em", textTransform:"uppercase", color:C.gold, marginBottom:"0.4rem" }}>Mollick &amp; Mollick (2023)</div>
-          <div style={{ fontSize:"1.35rem", fontWeight:"normal", color:C.ink, marginBottom:"2rem", fontFamily:"'Georgia',serif" }}>Progettare con l'AI: percorso per docenti</div>
+          <div style={{ fontSize:"2rem", fontWeight:"normal", color:C.ink, marginBottom:"2rem", fontFamily:"'Georgia',serif" }}>Progettare con l'AI: percorso per docenti</div>
           <div style={{ fontSize:"3rem", marginBottom:"1.25rem" }}>🎓</div>
-          <h1 style={{ margin:"0 0 0.75rem", fontSize:"1.6rem", fontWeight:"normal" }}>{ls.title}</h1>
+          <h1 style={{ margin:"0 0 0.75rem", fontSize:"1.2rem", fontWeight:"normal", color:C.muted }}>{ls.title}</h1>
           <p style={{ margin:"0 0 2rem", fontSize:"0.97rem", color:C.muted, lineHeight:1.8 }}>{ls.sub}</p>
           <div style={{ display:"flex", gap:"1rem", justifyContent:"center", flexWrap:"wrap" }}>
             {[["it",ls.btnIt],["en",ls.btnEn]].map(([l,label])=>(
