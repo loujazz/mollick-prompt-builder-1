@@ -1388,7 +1388,10 @@ export default function App() {
 
       {/* Footer */}
       <div style={{ background:C.cream, borderTop:`1px solid ${C.rule}`, padding:"1rem 1.75rem", fontSize:"0.8rem", color:C.muted, textAlign:"center" }}>
-        Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.
+        {lang === "it"
+          ? <>Creato da Luigi Parisi sulla base di: Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.</>
+          : <>Created by Luigi Parisi based on: Mollick, E.R. &amp; Mollick, L. (2023). <em>Assigning AI: Seven Approaches for Students with Prompts.</em> Wharton School, University of Pennsylvania.</>
+        }
       </div>
     </div>
   );
