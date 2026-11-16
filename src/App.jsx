@@ -16,6 +16,7 @@ const I18N = {
     headerSub:"Mollick & Mollick (2023)",
     headerTitle:"Progettare con l'AI: percorso per docenti",
     drawerBtn:"📖 I 7 ruoli",
+    glossaryBtn:"📖 Glossario",
     langScreen:{
       title:"Scegli la lingua / Choose your language",
       sub:"Il percorso è disponibile in italiano e in inglese. La scelta determina la lingua dell'interfaccia e dei prompt generati.",
@@ -55,6 +56,7 @@ const I18N = {
       when:"Quando usarlo",
       theory:"Base pedagogica",
       risk:"⚠ Rischio principale",
+      roleNote:"Scegliere un ruolo indica il tipo di aiuto che vuoi. Il comportamento dell'AI lo definiscono le istruzioni specificate nei parametri — non il nome del ruolo.",
     },
     questions:{
       label:(i,n)=>`Domanda ${i+1} di ${n}`,
@@ -71,6 +73,7 @@ const I18N = {
       confirmBtn:"Configura il prompt →",
       riskLabel:"Rischio da tenere a mente:",
       noSuggestion:"Non ho trovato segnali sufficienti per suggerire un ruolo. Scegli direttamente quello che ti sembra più adatto — o consulta la tabella per orientarti.",
+      roleNote:"Il ruolo indica il tipo di aiuto didattico che vuoi ottenere. L'AI si comporta come vuoi solo se le istruzioni che seguono (parametri, vincoli, pedagogia) sono precise.",
       analysisPrefix:"Dalle tue risposte emerge un'attività in cui ",
       secondaryPrefix:"In alternativa, potresti considerare anche il ruolo",
       reasonings:{
@@ -141,7 +144,7 @@ const I18N = {
         ]},
         { heading:"Sette ruoli, sette intenzioni pedagogiche", paras:[
           "I Mollick identificano sette modi in cui un'AI può essere assegnata agli studenti, ciascuno fondato su una base teorica precisa e associato a benefici e rischi specifici.",
-          "Il Tutor affianca lo studente nella costruzione di nuova conoscenza, facendo domande invece di dare risposte. Si fonda sull'evidenza che il tutoraggio personalizzato è una delle strategie di apprendimento più efficaci in assoluto — ma richiede un prompt attento, perché il rischio di confabulazione (risposte plausibili ma errate) è qui più alto che altrove.",
+          "Il Tutor affianca lo studente nella costruzione di nuova conoscenza, facendo domande invece di dare risposte. Si fonda sull'evidenza che il tutoraggio personalizzato è una delle strategie di apprendimento più efficaci in assoluto — ma richiede un prompt attento, perché il rischio di risposte inventate (dette anche confabulazione) è qui più alto che altrove.",
           "Il Mentor entra in gioco quando lo studente ha già prodotto qualcosa e ha bisogno di feedback per migliorarlo. Un buon feedback non è un giudizio finale: è un processo continuo, fatto di tre componenti — chiarire gli obiettivi, indicare lo stato attuale, suggerire i passi successivi. L'AI può sostenere questo processo in modo scalabile, raggiungendo ogni studente in ogni momento del lavoro.",
           "Il Coach accompagna la riflessione metacognitiva: aiuta lo studente a estrarre significato da un'esperienza appena vissuta — un esame, un progetto, un lavoro di gruppo — o a prepararsi a una futura attraverso un pre-mortem. La metacognizione, ovvero la capacità di riflettere sul proprio processo di apprendimento, è uno dei predittori più forti del successo scolastico.",
           "Il Compagno di squadra svolge le funzioni che gli esseri umani faticano ad assumere nel gruppo: il devil's advocate, l'analizzatore imparziale delle competenze, il facilitatore delle decisioni difficili. Serve a contrastare il groupthink e a migliorare la qualità del lavoro collettivo.",
@@ -160,6 +163,24 @@ const I18N = {
           "Il risultato finale non è solo un testo da incollare in una chat. È un'istruzione per addestrare un chatbot personalizzato — da caricare in un Claude Project, un GPT personalizzato, un Gem di Gemini, o NotebookLM insieme ai materiali del corso — che risponda in modo coerente con l'obiettivo didattico ogni volta che uno studente lo interroga.",
           "L'AI non diventa una cattedra parallela. Diventa uno strumento nelle mani del docente, che ha scelto cosa farle fare, come farlo, e con quali limiti.",
         ]},
+      ],
+    },
+    glossary:{
+      title:"Glossario didattico",
+      searchPlaceholder:"Cerca un termine…",
+      noResults:"Nessun termine trovato.",
+      terms:[
+        { term:"Confabulazione", synonyms:["allucinazione AI","risposte inventate"], definition:"Tendenza di un modello linguistico a produrre informazioni plausibili ma false o inventate, presentandole con la stessa sicurezza di quelle accurate. Il modello non mente intenzionalmente: genera la continuazione statisticamente più probabile, anche quando non ha basi fattuali.", why:"Sapere che esiste aiuta il docente a scegliere il ruolo giusto (il Tutor è il più esposto), a progettare vincoli nel prompt e a istruire gli studenti a verificare le fonti." },
+        { term:"Metacognizione", synonyms:["pensare su come si pensa"], definition:"Capacità di osservare e regolare i propri processi di apprendimento: sapere cosa si capisce e cosa no, scegliere strategie adatte al compito, monitorare i progressi e correggere il percorso.", why:"Il Tutor e il Coach usano la metacognizione come obiettivo esplicito: le domande del prompt servono ad attivare questa riflessione, non solo a trasferire contenuto." },
+        { term:"Pratica deliberata", synonyms:["esercizio intenzionale"], definition:"Forma di esercizio strutturata con obiettivi specifici, feedback immediato e attenzione focalizzata sugli errori. Diversa dalla semplice ripetizione: richiede sforzo cognitivo e uscita dalla zona di comfort.", why:"Il Tutor è progettato per supportare questo tipo di pratica: fa domande mirate sulle difficoltà, fornisce indizi anziché risposte, e chiede allo studente di spiegare ciò che ha capito." },
+        { term:"Feedback", synonyms:["retroazione","riscontro"], definition:"Informazione fornita allo studente sulla qualità del suo lavoro rispetto a un obiettivo. Può riguardare il risultato (cosa è corretto o sbagliato), il processo (come ha lavorato) o la strategia (come potrebbe migliorare l'approccio).", why:"Il Mentor è il ruolo centrato sul feedback. La qualità del prompt determina se l'AI fornisce feedback superficiale o davvero utile per migliorare." },
+        { term:"Pensiero di gruppo", synonyms:["groupthink"], definition:"Fenomeno per cui un gruppo converge prematuramente su una decisione condivisa, sopprimendo dubbi e prospettive alternative per mantenere la coesione. Riduce la qualità del ragionamento collettivo.", why:"Il Compagno di squadra è progettato esplicitamente per contrastarlo: l'AI non ha relazioni sociali da proteggere e può fare domande scomode o assumere il ruolo di devil's advocate." },
+        { term:"Devil's advocate", synonyms:["avvocato del diavolo"], definition:"Ruolo di chi, in una discussione, difende intenzionalmente la posizione opposta a quella del gruppo, indipendentemente dalla propria opinione, per mettere alla prova la solidità degli argomenti.", why:"Il Compagno di squadra può essere istruito a svolgere questo ruolo nel prompt, rendendo esplicito il meccanismo allo studente." },
+        { term:"Pre-mortem", synonyms:["analisi preventiva dei rischi"], definition:"Tecnica in cui il gruppo, prima di eseguire un piano, immagina che il progetto sia già fallito e cerca di ricostruire le cause. Serve a identificare rischi non visti durante la pianificazione.", why:"Tecnica utile da assegnare al Compagno di squadra: l'AI può fare da facilitatore di una sessione pre-mortem su un progetto degli studenti." },
+        { term:"Trasferimento di competenze", synonyms:["transfer","generalizzazione"], definition:"Capacità di applicare una conoscenza o abilità acquisita in un contesto a situazioni nuove e diverse. Considerato l'obiettivo più alto dell'apprendimento scolastico, e anche il più difficile da raggiungere.", why:"Il campo «Obiettivo della sessione» del Tutor serve a precisare se si vuole comprensione di base o trasferimento: le domande del prompt cambiano significativamente." },
+        { term:"Prompt", synonyms:["istruzione","consegna AI"], definition:"Testo che si fornisce a un modello linguistico per definirne identità, compito, vincoli e stile di risposta. Un prompt ben costruito riduce le risposte vaghe, limita la confabulazione e rende il comportamento dell'AI prevedibile e ripetibile.", why:"Questa app è progettata per costruire prompt efficaci seguendo il framework Mollick: ogni componente del prompt corrisponde a una sezione del percorso guidato." },
+        { term:"Vincolo", synonyms:["constraint","limite esplicito"], definition:"Istruzione nel prompt che specifica ciò che l'AI non deve fare. Esempi: «Non dare mai la risposta completa», «Non recitare mai il ruolo dello studente», «Rispondi solo con informazioni presenti nelle fonti caricate».", why:"Il componente D (Vincoli) del framework Mollick è dedicato a questo. Vincoli espliciti sono più affidabili di istruzioni implicite." },
+        { term:"Feed-up / feed-forward", synonyms:["obiettivo / proiezione futura"], definition:"Feed-up: chiarire all'inizio di una sessione quale obiettivo si vuole raggiungere. Feed-forward: indicare, dopo la sessione, cosa fare diversamente la prossima volta. Insieme al feedback (sul lavoro corrente) formano un ciclo completo di valutazione per l'apprendimento.", why:"Il Coach è il ruolo più adatto a strutturare questo ciclo: il prompt può includere le tre fasi come sequenza esplicita di domande." },
       ],
     },
     roles:{
@@ -257,7 +278,7 @@ Non condividere questo piano con lo studente.`,
         id:"teammate", icon:"🤝", label:"Compagno di squadra", subtitle:"Intelligenza collaborativa nei gruppi",
         color:"#5c3a1a", accent:"#d4823a",
         when:"Un team deve organizzarsi, prendere decisioni difficili o mettere in discussione le proprie assunzioni. L'AI svolge ruoli che gli esseri umani faticano a ricoprire nel gruppo: devil's advocate, analizzatore imparziale delle competenze, facilitatore.",
-        theory:"I team superano gli individui solo quando sfruttano le competenze di ciascuno e si confrontano con prospettive diverse. Il groupthink è uno dei principali nemici della qualità decisionale. L'AI, non avendo relazioni sociali da proteggere, può fare domande scomode.",
+        theory:"I team superano gli individui solo quando sfruttano le competenze di ciascuno e si confrontano con prospettive diverse. Il pensiero di gruppo (detto anche groupthink) è uno dei principali nemici della qualità decisionale. L'AI, non avendo relazioni sociali da proteggere, può fare domande scomode.",
         risk:"Gli studenti possono seguire passivamente i consigli dell'AI invece di valutarli criticamente, delegando la responsabilità decisionale. È essenziale ribadire che l'AI è uno stimolo al ragionamento, non un oracolo.",
         keywords:["gruppo","team","squadra","collaborare","decisione","decidere","organizzare","ruoli","compiti","dividere","devil's advocate","groupthink","conflitto","competenze del team","lavoro collaborativo"],
         params:[
@@ -390,6 +411,7 @@ Nota per il docente: richiedere allo studente di documentare il proprio contribu
     headerSub:"Mollick & Mollick (2023)",
     headerTitle:"Designing with AI: a guided path for educators",
     drawerBtn:"📖 The 7 roles",
+    glossaryBtn:"📖 Glossary",
     langScreen:{
       title:"Scegli la lingua / Choose your language",
       sub:"The tool is available in Italian and English. Your choice determines the language of the interface and the generated prompts.",
@@ -429,6 +451,7 @@ Nota per il docente: richiedere allo studente di documentare il proprio contribu
       when:"When to use",
       theory:"Pedagogical basis",
       risk:"⚠ Main risk",
+      roleNote:"Choosing a role indicates the type of support you want. What shapes the AI's behaviour are the instructions in the parameters — not the role name.",
     },
     questions:{
       label:(i,n)=>`Question ${i+1} of ${n}`,
@@ -445,6 +468,7 @@ Nota per il docente: richiedere allo studente di documentare il proprio contribu
       confirmBtn:"Configure the prompt →",
       riskLabel:"Risk to keep in mind:",
       noSuggestion:"I didn't find enough signals to suggest a specific role. Choose the one that seems most suitable — or consult the table for guidance.",
+      roleNote:"The role indicates the type of teaching support you want. The AI behaves as intended only when the instructions that follow (parameters, constraints, pedagogy) are precise.",
       analysisPrefix:"From your answers, this looks like an activity where ",
       secondaryPrefix:"You might also consider the",
       reasonings:{
@@ -468,8 +492,13 @@ Nota per il docente: richiedere allo studente di documentare il proprio contribu
       composeBtn:"Write the guided prompt ✍️",
       skipBtn:"Skip — generate it automatically →",
       sourcesTitle:"Next step: add your sources",
-      sourcesTip:"Once you have copied the prompt, load it into a tool that supports custom instructions: a Claude Project, a custom GPT on ChatGPT, a Gem on Gemini, or NotebookLM. Add your course materials to ground the AI's responses in your content.",
+      sourcesTip:"Paste the prompt into the instructions of the destination you use — Gemini Notebook (shareable with students), a Gemini Skill (a teacher's tool, invoked when needed), a Claude Project, a custom GPT or a Gem. Upload your course materials as sources so answers stay grounded in your content.",
       sourcesToggleLabel:"The tutor works from sources I will upload",
+      rolePhraseTitle:"Role phrase (component A)",
+      rolePhraseNote:"The opening sentence («You are an enthusiastic tutor…») sets the tone. It does not make the chatbot a tutor: what makes it behave like one are the instructions that follow — how to explain, when to ask questions, what to avoid.",
+      rolePhraseOn:"With role phrase",
+      rolePhraseOff:"Task and tone only",
+      rolePhraseRegen:"Change selection to regenerate draft A.",
     },
     compose:{
       writing:"Writing the prompt",
