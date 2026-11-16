@@ -1162,7 +1162,7 @@ function GlossaryDrawer({ open, onClose, t }) {
       || (item.synonyms||[]).some(s => s.toLowerCase().includes(q))
       || item.definition.toLowerCase().includes(q);
   });
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
     const onKey = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
