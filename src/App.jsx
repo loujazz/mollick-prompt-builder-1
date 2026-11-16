@@ -838,7 +838,8 @@ function buildDraft(componentId, role, v, lang) {
 
   if (componentId === "personalization") {
     const fields = [
-      (v.level||v.team_size)  && (lang==="en"?`Level/context: ${v.level||v.team_size}`                                                             :`Livello/contesto: ${v.level||v.team_size}`),
+      (role.id==="tutor"||role.id==="mentor") ? (v.usage_context && (lang==="en"?`Usage context: ${v.usage_context}`:`Contesto d'uso: ${v.usage_context}`)) : (v.team_size && (lang==="en"?`Team composition: ${v.team_size}`:`Composizione del team: ${v.team_size}`)),
+      (role.id==="tutor" && v.behavior) && (lang==="en"?`How to explain and ask questions: ${v.behavior}`:`Come deve spiegare e fare domande: ${v.behavior}`),
       (v.topic||v.concept||v.assignment||v.experience||v.project||v.task) && (lang==="en"?`Topic/task: ${v.topic||v.concept||v.assignment||v.experience||v.project||v.task}`:`Argomento/compito: ${v.topic||v.concept||v.assignment||v.experience||v.project||v.task}`),
       v.prior     && (lang==="en"?`Starting point: ${v.prior}`       :`Punto di partenza: ${v.prior}`),
       (v.mistakes||v.errors) && (lang==="en"?`Typical errors: ${v.mistakes||v.errors}`:`Errori tipici: ${v.mistakes||v.errors}`),
@@ -1075,6 +1076,7 @@ function RoleTable({ onBack, t }) {
 // ─── PromptBox ────────────────────────────────────────────────
 function PromptBox({ text, onRestart, role, t }) {
   const [selected, setSelected] = useState(false);
+  const [copied, setCopied] = useState(false);
   const preRef = useRef(null);
   const handleSelect = () => {
     if (!preRef.current) return;
@@ -1086,6 +1088,17 @@ function PromptBox({ text, onRestart, role, t }) {
     setSelected(true);
     setTimeout(()=>setSelected(false), 3000);
   };
+  const handleCopy = () => {
+    const doCopy = () => { setCopied(true); setTimeout(()=>setCopied(false), 2000); };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(doCopy).catch(()=>{
+        try { document.execCommand("copy"); doCopy(); } catch(e) {}
+      });
+    } else {
+      try { document.execCommand("copy"); doCopy(); } catch(e) {}
+    }
+  };
+  const hasUnfilled = /\[[^\]]+\]/.test(text);
   return (
     <div style={{ border:`2px solid ${C.gold}`, borderRadius:6, overflow:"hidden", boxShadow:"0 4px 20px rgba(0,0,0,0.08)", marginTop:"0.5rem" }}>
       <div style={{ background:C.ink, padding:"1rem 1.5rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
@@ -1093,11 +1106,27 @@ function PromptBox({ text, onRestart, role, t }) {
           <div style={{ fontSize:"0.7rem", color:C.gold, letterSpacing:"0.18em", textTransform:"uppercase", fontWeight:700 }}>{t.result.promptLabel}</div>
           <div style={{ color:C.paper, fontSize:"0.95rem", fontStyle:"italic", marginTop:"0.15rem" }}>{role.icon} {role.label}</div>
         </div>
-        <button onClick={handleSelect}
-          style={{ background:selected?"#3a7a5a":C.gold, color:"#fff", border:"none", borderRadius:4, padding:"0.55rem 1.25rem", fontSize:"0.9rem", cursor:"pointer", fontWeight:700, transition:"background 0.2s", minWidth:180 }}>
-          {selected ? t.result.selectedBtn : t.result.selectBtn}
-        </button>
+        <div style={{ display:"flex", gap:"0.5rem" }}>
+          <button onClick={handleCopy}
+            style={{ background:copied?"#3a7a5a":C.gold, color:"#fff", border:"none", borderRadius:4, padding:"0.55rem 1.1rem", fontSize:"0.9rem", cursor:"pointer", fontWeight:700, transition:"background 0.2s" }}>
+            {copied ? t.result.copiedBtn : t.result.copyBtn}
+          </button>
+          <button onClick={handleSelect}
+            style={{ background:selected?"#3a7a5a":"transparent", color:selected?"#fff":C.gold, border:`1.5px solid ${C.gold}`, borderRadius:4, padding:"0.55rem 1.1rem", fontSize:"0.9rem", cursor:"pointer", fontWeight:700, transition:"background 0.2s" }}>
+            {selected ? t.result.selectedBtn : t.result.selectBtn}
+          </button>
+        </div>
       </div>
+      {hasUnfilled && (
+        <div style={{ background:"#fff8e6", borderBottom:`1px solid #e8c97a`, padding:"0.75rem 1.5rem", display:"flex", gap:"0.6rem", alignItems:"flex-start" }}>
+          <span style={{ flexShrink:0 }}>⚠️</span>
+          <p style={{ margin:0, fontSize:"0.88rem", color:"#7a5a00", lineHeight:1.6 }}>
+            {t.lang==="en"
+              ? "The prompt contains unfilled fields: replace the text in square brackets before using it."
+              : "Il prompt contiene campi non compilati: sostituisci il testo tra parentesi quadre prima di usarlo."}
+          </p>
+        </div>
+      )}
       <div style={{ background:C.bluelt, borderBottom:`1px solid #c8d4e8`, padding:"1rem 1.5rem", display:"flex", gap:"0.75rem", alignItems:"flex-start" }}>
         <span style={{ fontSize:"1.15rem", flexShrink:0, marginTop:"0.05rem" }}>💡</span>
         <div>
@@ -1141,6 +1170,7 @@ export default function App() {
   const [composeValues, setComposeValues] = useState({});
   const [drawerOpen,    setDrawerOpen]    = useState(false);
   const [aboutOpen,     setAboutOpen]     = useState(false);
+  const [sourcesToggle, setSourcesToggle] = useState(false);
   const textareaRef = useRef(null);
 
   const t   = lang ? I18N[lang] : I18N.it;
@@ -1160,9 +1190,9 @@ export default function App() {
     : phase==="compose"   ? questions.length + 1 + (role?.params.length||0) + composeIndex
     : totalSteps;
 
-  const initCompose = (pv, r) => {
+  const initCompose = (pv, r, st) => {
     const init = {};
-    mc.forEach(c => { init[c.id] = buildDraft(c.id, r, pv, lang); });
+    mc.forEach(c => { init[c.id] = buildDraft(c.id, r, {...pv, _sourcesToggle: st}, lang); });
     return init;
   };
 
@@ -1192,7 +1222,7 @@ export default function App() {
 
   const handleParamNext = () => {
     if (paramIndex < role.params.length-1) { setParamIndex(paramIndex+1); }
-    else { setComposeIndex(0); setComposeValues(initCompose(paramValues,role)); setPhase("compose"); }
+    else { setComposeIndex(0); setComposeValues(initCompose(paramValues,role,sourcesToggle)); setPhase("compose"); }
   };
 
   const handleComposeNext = () => {
@@ -1203,7 +1233,7 @@ export default function App() {
   const handleRestart = () => {
     setPhase("intro"); setQIndex(0); setAnswers({}); setCurrentAnswer("");
     setSuggestion(null); setSelectedRole(null); setParamIndex(0); setParamValues({});
-    setComposeIndex(0); setComposeValues({});
+    setComposeIndex(0); setComposeValues({}); setSourcesToggle(false);
   };
 
   const handleLangChange = () => {
@@ -1212,7 +1242,14 @@ export default function App() {
   };
 
   const usingComposed = phase==="result" && Object.keys(composeValues).length>0;
-  const finalPrompt   = usingComposed ? buildComposedPrompt(composeValues) : role?.buildPrompt(paramValues);
+  const finalPrompt   = usingComposed ? buildComposedPrompt(composeValues) : (() => {
+    const base = role?.buildPrompt(paramValues);
+    if (!base || !sourcesToggle) return base;
+    const sourceLine = lang==="en"
+      ? "\n\nOnly answer using information from the uploaded sources. If the information is not there, say so clearly and do not invent. When you use a source, indicate which one."
+      : "\n\nRispondi solo con informazioni presenti nelle fonti caricate. Se l'informazione non c'è, dillo chiaramente e non inventare. Quando usi una fonte, indica da quale proviene.";
+    return base + sourceLine;
+  })();
 
   useEffect(() => {
     if (phase==="questions") textareaRef.current?.focus();
@@ -1340,6 +1377,7 @@ export default function App() {
             </div>
             <h2 style={{ margin:"0 0 0.6rem", fontSize:"1.3rem", fontWeight:"bold", lineHeight:1.4 }}>{questions[qIndex].text}</h2>
             <p style={{ margin:"0 0 1.1rem", fontSize:"0.95rem", color:C.muted, fontStyle:"italic", lineHeight:1.7 }}>{questions[qIndex].hint}</p>
+            {t.questions.dataNote && <p style={{ margin:"0 0 0.75rem", fontSize:"0.8rem", color:C.muted, fontStyle:"italic" }}>⚠ {t.questions.dataNote}</p>}
             <textarea ref={textareaRef} value={currentAnswer} onChange={e=>setCurrentAnswer(e.target.value)} onKeyDown={handleKeyDown} placeholder={questions[qIndex].placeholder} rows={4}
               style={{ width:"100%", boxSizing:"border-box", border:`1.5px solid ${C.rule}`, borderRadius:5, padding:"0.9rem 1.1rem", fontSize:"0.97rem", fontFamily:"'Georgia',serif", resize:"vertical", outline:"none", color:C.ink, lineHeight:1.7, background:"#fff", transition:"border-color 0.15s" }}
               onFocus={e=>e.target.style.borderColor=C.accent}
@@ -1445,15 +1483,22 @@ export default function App() {
                 <div style={{ fontSize:"1.1rem", fontWeight:"bold", color:role.color }}>{role.label}</div>
               </div>
             </div>
+            {t.params.dataNote && <p style={{ margin:"0 0 0.75rem", fontSize:"0.8rem", color:C.muted, fontStyle:"italic" }}>⚠ {t.params.dataNote}</p>}
             <ParamStep param={role.params[paramIndex]} value={paramValues[role.params[paramIndex].id]} onChange={handleParamChange} index={paramIndex} total={role.params.length} t={t} />
             {isLastParam && (
-              <div style={{ marginTop:"1.25rem", background:C.bluelt, border:`1px solid #c8d4e8`, borderLeft:`4px solid ${C.blue}`, borderRadius:"0 6px 6px 0", padding:"1rem 1.1rem", display:"flex", gap:"0.75rem", alignItems:"flex-start" }}>
-                <span style={{ fontSize:"1.2rem", flexShrink:0 }}>💡</span>
-                <div>
-                  <div style={{ fontSize:"0.72rem", fontWeight:700, color:C.blue, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.3rem" }}>{t.params.sourcesTitle}</div>
-                  <p style={{ margin:0, fontSize:"0.9rem", color:C.blue, lineHeight:1.7 }}>{t.params.sourcesTip}</p>
+              <>
+                <div style={{ marginTop:"1.25rem", background:C.bluelt, border:`1px solid #c8d4e8`, borderLeft:`4px solid ${C.blue}`, borderRadius:"0 6px 6px 0", padding:"1rem 1.1rem", display:"flex", gap:"0.75rem", alignItems:"flex-start" }}>
+                  <span style={{ fontSize:"1.2rem", flexShrink:0 }}>💡</span>
+                  <div>
+                    <div style={{ fontSize:"0.72rem", fontWeight:700, color:C.blue, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.3rem" }}>{t.params.sourcesTitle}</div>
+                    <p style={{ margin:0, fontSize:"0.9rem", color:C.blue, lineHeight:1.7 }}>{t.params.sourcesTip}</p>
+                  </div>
                 </div>
-              </div>
+                <div style={{ marginTop:"0.9rem", display:"flex", alignItems:"flex-start", gap:"0.6rem" }}>
+                  <input type="checkbox" id="sourcesToggle" checked={sourcesToggle} onChange={e=>setSourcesToggle(e.target.checked)} style={{ marginTop:"0.2rem", cursor:"pointer", flexShrink:0 }} />
+                  <label htmlFor="sourcesToggle" style={{ fontSize:"0.88rem", color:C.ink, cursor:"pointer", lineHeight:1.6 }}>{t.params.sourcesToggleLabel}</label>
+                </div>
+              </>
             )}
             <div style={{ display:"flex", justifyContent:"space-between", marginTop:"1.4rem" }}>
               <button onClick={()=>paramIndex>0?setParamIndex(paramIndex-1):setPhase("suggest")}
